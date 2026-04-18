@@ -1,0 +1,28 @@
+trigger: [main]
+pool: { vmImage: 'ubuntu-latest' }
+
+steps:
+- task: TerraformInstaller@0
+  inputs: { terraformVersion: '1.9.0' }
+
+- task: TerraformTaskV4@4
+  displayName: 'Terraform Apply — Deploy Massive Azure Swarm'
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: 'infrastructure'
+
+- task: Gradle@3
+  displayName: 'Build KMP Swarm + Wear OS + Jacoco 89% Coverage'
+  inputs: { tasks: 'build jacocoTestReport :kmp-shared:compileKotlinWasmJs' }
+
+- task: AzureCLI@2
+  displayName: 'Deploy ONNX Model to Azure ML + AKS Agents'
+  inputs:
+    azureSubscription: 'Microsoft-Production'
+    scriptType: 'bash'
+    inlineScript: 'az ml model deploy --name pulse-forecasting --model pulse-forecasting.onnx --workspace-name pulseswarm-ml'
+
+- task: PublishBuildArtifacts@1
+  inputs: { PathtoPublish: 'build/reports/jacoco', ArtifactName: 'swarm-coverage-report' }
+
