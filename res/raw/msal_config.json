@@ -1,0 +1,15 @@
+{
+  "client_id": "YOUR_AZURE_AD_CLIENT_ID",
+  "authorization_user_agent": "DEFAULT",
+  "account_mode": "MULTIPLE",
+  "redirect_uri": "msauth://com.devmoe.pulsesync/YOUR_HASH",
+  "broker_redirect_uri_registered": false,
+  "authorities": [
+    {
+      "type": "AAD",
+      "audience": "AzureADandPersonalMicrosoftAccount",
+      "tenant_id": "common"
+    }
+  ]
+}
+
