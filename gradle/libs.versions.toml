@@ -16,3 +16,5 @@ firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+msal = "5.0.0"
+microsoft-graph = "6.0.0"
