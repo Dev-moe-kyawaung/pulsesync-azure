@@ -1,0 +1,14 @@
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+formatting:
+  active: true
+complexity:
+  active: true
+  LongParameterList:
+    threshold: 6
+style:
+  active: true
+  ForbiddenComment:
+    active: false
+    
