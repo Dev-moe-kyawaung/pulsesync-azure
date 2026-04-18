@@ -1,0 +1,9 @@
+- task: Gradle@3
+  displayName: 'Run Unit & Integration Tests with Jacoco (85%+ target)'
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'testDebugUnitTest jacocoTestReport'
+    testResultsFiles: '**/TEST-*.xml'
+    codeCoverageTool: 'JaCoCo'
+    javaHomeOption: 'JDKVersion'
+
