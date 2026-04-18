@@ -1,2 +1,6 @@
 implementation(libs.msal)
 implementation(libs.microsoft.graph)
+implementation(libs.retrofit)
+implementation(libs.retrofit.converter.moshi)
+implementation(libs.okhttp)
+implementation(libs.moshi)
