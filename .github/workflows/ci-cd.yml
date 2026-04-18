@@ -1,0 +1,32 @@
+name: Android CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grant execute permission
+        run: chmod +x gradlew
+      - name: Run Detekt & Lint
+        run: ./gradlew detekt lintDebug
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest
+      - name: Build Release
+        run: ./gradlew assembleRelease
+      - name: Upload to Firebase App Distribution (Azure ready)
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          groups: testers
