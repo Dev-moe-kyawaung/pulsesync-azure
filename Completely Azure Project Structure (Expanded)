@@ -1,0 +1,29 @@
+pulsesync-android/
+├── backend/                          # New — Azure Functions backend (Kotlin)
+│   ├── src/main/java/com/devmoe/functions/
+│   │   ├── DurableSyncOrchestrator.kt
+│   │   ├── OpenAIAnalyzerFunction.kt
+│   │   └── GraphTriggerFunction.kt
+│   ├── host.json
+│   └── pom.xml                       # Maven for Azure Functions Java runtime
+├── build-logic/
+├── core/
+│   ├── data/                         # Now uses Azure Cosmos DB SDK + SQLDelight
+│   ├── domain/                       # UseCases call Azure services
+│   └── ui/                           # Adaptive Compose + Azure App Insights telemetry
+├── feature/
+│   ├── auth/                         # Pure MSAL Azure AD B2C
+│   ├── dashboard/                    # Real-time SignalR listener + Graph calendar view
+│   ├── insights/                     # Azure OpenAI + Durable Functions trigger
+│   └── orchestrator/                 # New — Autonomous AI Sync Agent UI
+├── library/
+│   ├── azure-sdk/                    # New module wrapping all Azure clients
+│   └── designsystem/
+├── .azure-pipelines/
+│   └── azure-pipelines-full.yml      # Completely rewritten
+├── bicep/
+│   └── main.bicep                    # IaC for all Azure resources
+├── gradle/libs.versions.toml         # Massive Azure SDK expansion
+├── settings.gradle.kts               # Includes :backend and :kmp-shared
+├── kmp-shared/                       # Kotlin Multiplatform surprise layer
+└── README.md
