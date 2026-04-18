@@ -1,0 +1,24 @@
+pulseswarm-android/
+├── backend/                          # Azure Functions + Semantic Kernel agents
+│   ├── src/main/kotlin/com/devmoe/swarm/
+│   │   ├── agents/                   # 7 agent classes
+│   │   ├── kernel/                   # Semantic Kernel planner & plugins
+│   │   └── DurableSwarmCoordinator.kt
+├── infrastructure/                   # Terraform (bigger IaC)
+│   ├── main.tf
+│   ├── variables.tf
+│   └── aks-cluster.tf
+├── kmp-shared/                       # KMP 2.0 with Wasm + Wear targets
+│   ├── src/commonMain/kotlin/com/devmoe/swarm/
+│   │   ├── agents/
+│   │   ├── usecases/
+│   │   └── AzureSwarmClient.kt
+├── feature/
+│   ├── swarm-dashboard/              # New Compose UI showing live swarm status
+│   ├── wear-insights/                # Wear OS tile + complication for AI alerts
+│   └── orchestrator/
+├── library/azure-swarm/              # Shared swarm SDK with Semantic Kernel
+├── .azure-pipelines/azure-pipelines-swarm.yml
+├── gradle/libs.versions.toml         # Now includes semantic-kernel, onnx, dapr, azure-ai-search
+├── detekt.yml
+└── README.md
