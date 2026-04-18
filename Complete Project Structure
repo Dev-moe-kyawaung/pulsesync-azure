@@ -1,0 +1,78 @@
+pulsesync-android/
+├── app/
+│   ├── src/main/
+│   │   ├── AndroidManifest.xml
+│   │   ├── java/com/devmoe/pulsesync/
+│   │   │   ├── PulseSyncApp.kt
+│   │   │   ├── di/AppModule.kt
+│   │   │   └── MainActivity.kt
+│   │   └── res/
+│   │       └── values/strings.xml
+│   ├── build.gradle.kts
+│   └── google-services.json (add your own)
+├── core/
+│   ├── data/
+│   │   ├── src/main/java/com/devmoe/core/data/
+│   │   │   ├── repository/PulseRepositoryImpl.kt
+│   │   │   └── local/PulseDao.kt
+│   │   └── build.gradle.kts
+│   ├── domain/
+│   │   ├── src/main/java/com/devmoe/core/domain/
+│   │   │   ├── model/PulseData.kt
+│   │   │   ├── repository/PulseRepository.kt
+│   │   │   └── usecase/
+│   │   │       ├── GetPulsesUseCase.kt
+│   │   │       └── SyncPulsesUseCase.kt
+│   │   └── build.gradle.kts
+│   ├── navigation/
+│   │   ├── src/main/java/com/devmoe/core/navigation/
+│   │   │   └── NavGraph.kt
+│   │   └── build.gradle.kts
+│   ├── test/
+│   │   └── build.gradle.kts
+│   └── ui/
+│       ├── src/main/java/com/devmoe/core/ui/
+│       │   ├── theme/
+│       │   │   ├── Color.kt
+│       │   │   ├── Theme.kt
+│       │   │   └── Type.kt
+│       │   └── components/
+│       │       └── LoadingIndicator.kt
+│       └── build.gradle.kts
+├── feature/
+│   ├── auth/
+│   │   ├── src/main/java/com/devmoe/feature/auth/
+│   │   │   ├── presentation/
+│   │   │   │   ├── LoginScreen.kt
+│   │   │   │   └── LoginViewModel.kt
+│   │   │   └── di/AuthModule.kt
+│   │   └── build.gradle.kts
+│   ├── dashboard/
+│   │   ├── src/main/java/com/devmoe/feature/dashboard/
+│   │   │   ├── presentation/
+│   │   │   │   ├── DashboardScreen.kt
+│   │   │   │   └── DashboardViewModel.kt
+│   │   │   └── di/DashboardModule.kt
+│   │   └── build.gradle.kts
+├── library/
+│   ├── designsystem/
+│   │   ├── src/main/java/com/devmoe/library/designsystem/
+│   │   │   └── PulseButton.kt
+│   │   └── build.gradle.kts
+│   └── common/
+│       ├── src/main/java/com/devmoe/library/common/
+│       │   └── util/Constants.kt
+│       └── build.gradle.kts
+├── build-logic/
+│   └── convention/
+│       ├── src/main/kotlin/AndroidApplicationConventionPlugin.kt
+│       └── build.gradle.kts
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml
+├── gradle/
+│   └── libs.versions.toml
+├── detekt.yml
+├── settings.gradle.kts
+├── build.gradle.kts
+└── README.md
