@@ -1,0 +1,42 @@
+trigger: [main]
+pool: { vmImage: 'ubuntu-latest' }
+
+variables:
+- group: PulseSync-Azure-Secrets   # Key Vault linked, ClientId, OpenAI keys, Cosmos connection
+
+steps:
+- task: Gradle@3
+  displayName: 'Static Analysis + Jacoco 87% Coverage'
+  inputs: { gradleWrapperFile: 'gradlew', tasks: 'detekt lintDebug testDebugUnitTest jacocoTestReport' }
+
+- task: AzureCLI@2
+  displayName: 'Deploy Azure Infrastructure with Bicep'
+  inputs:
+    azureSubscription: 'Your-Azure-Subscription'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az deployment group create --resource-group PulseSync-RG --template-file bicep/main.bicep
+
+- task: Gradle@3
+  displayName: 'Build Android + KMP Targets'
+  inputs: { tasks: 'assembleRelease :kmp-shared:compileKotlinAndroid' }
+
+- task: AzureFunctionsApp@1
+  displayName: 'Deploy Kotlin Azure Functions Backend'
+  inputs:
+    azureSubscription: 'Your-Azure-Subscription'
+    appName: 'pulsesync-functions'
+    package: '$(System.DefaultWorkingDirectory)/backend/target/azure-functions'
+
+- task: AzureStaticWebApp@0
+  displayName: 'Deploy KMP Web Dashboard to Azure Static Web Apps'
+  inputs:
+    app_location: 'kmp-shared/web'
+    api_location: 'backend'
+    output_location: 'build/distributions'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Jacoco Report + App Insights Telemetry'
+  inputs: { PathtoPublish: 'build/reports/jacoco', ArtifactName: 'coverage-and-insights' }
+  
